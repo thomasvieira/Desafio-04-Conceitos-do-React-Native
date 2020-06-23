@@ -25,17 +25,12 @@ export default function App() {
 
 
   async function handleLikeRepository(id) {
-    const result = await api.post(`repositories/${id}/like`)
-    const repository = result.data;
-    let updatedRepositories = repositories;
-    let index = repositories.findIndex((element) => element.id === id)
-//    console.log(`index:${index}`);
-//    console.log(`updatedRepositories[${index}]:`);
+    const response = await api.post(`repositories/${id}/like`)
+    const repository = response.data;
+    let updatedRepositories = [...repositories];
+    let index = repositories.findIndex((repository) => repository.id === id)
     updatedRepositories[index].likes = repository.likes;
-//    console.log(updatedRepositories[index].likes);
-    setRepositories([]);
     setRepositories(updatedRepositories);
-    // Implement "Like Repository" functionality
   }
 
   return (
